@@ -83,7 +83,6 @@ export default function Homepage() {
         <div className="cozy-hero-art">
           <video autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
             <source src="/assets/hero-video.mp4" type="video/mp4" />
-            <img src="/assets/product1/WhatsApp Image 2026-04-19 at 11.59.47 AM.jpeg" alt="Cozy Clothing hero" />
           </video>
         </div>
         
