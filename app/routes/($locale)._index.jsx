@@ -115,30 +115,31 @@ export default function Homepage() {
           <p>Explore our newest signature pieces.</p>
         </div>
         <div className="cozy-products-grid">
-          {(data.homepageProducts.length ? data.homepageProducts : [
-            {id: 'fallback-1', title: 'Cozy Silk Blouse', handle: '/collections', featuredImage: null, priceRange: {minVariantPrice: {amount: '999', currencyCode: 'INR'}}},
-            {id: 'fallback-2', title: 'Minimalist Overcoat', handle: '/collections', featuredImage: null, priceRange: {minVariantPrice: {amount: '999', currencyCode: 'INR'}}},
-            {id: 'fallback-3', title: 'Essential Knit', handle: '/collections', featuredImage: null, priceRange: {minVariantPrice: {amount: '999', currencyCode: 'INR'}}},
-            {id: 'fallback-4', title: 'Tailored Trousers', handle: '/collections', featuredImage: null, priceRange: {minVariantPrice: {amount: '999', currencyCode: 'INR'}}},
-          ]).map((product) => (
-            <Link key={product.id} className="cozy-product-card" to={product.handle.startsWith('/') ? product.handle : `/products/${product.handle}`}>
-              {product.featuredImage ? (
-                <Image
-                  data={product.featuredImage}
-                  alt={product.featuredImage.altText || product.title}
-                  sizes="(min-width: 45em) 32vw, 100vw"
-                />
-              ) : (
-                <div style={{ width: '100%', height: '100%', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No Image</div>
-              )}
-              <div className="cozy-product-meta">
-                <h3>{product.title}</h3>
-                <strong>
-                  <Money data={product.priceRange.minVariantPrice} />
-                </strong>
-              </div>
-            </Link>
-          ))}
+          {data.homepageProducts.length === 0 ? (
+            <div style={{ width: '100%', gridColumn: '1 / -1', textAlign: 'center', padding: '4rem 0' }}>
+              <p>No products found. (Make sure your products are set to "Active" and published to the Hydrogen sales channel in Shopify!)</p>
+            </div>
+          ) : (
+            data.homepageProducts.map((product) => (
+              <Link key={product.id} className="cozy-product-card" to={product.handle.startsWith('/') ? product.handle : `/products/${product.handle}`}>
+                {product.featuredImage ? (
+                  <Image
+                    data={product.featuredImage}
+                    alt={product.featuredImage.altText || product.title}
+                    sizes="(min-width: 45em) 32vw, 100vw"
+                  />
+                ) : (
+                  <div style={{ width: '100%', height: '100%', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No Image</div>
+                )}
+                <div className="cozy-product-meta">
+                  <h3>{product.title}</h3>
+                  <strong>
+                    <Money data={product.priceRange.minVariantPrice} />
+                  </strong>
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </section>
 
