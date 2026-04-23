@@ -129,7 +129,7 @@ export default function Homepage() {
                   sizes="(min-width: 45em) 32vw, 100vw"
                 />
               ) : (
-                <img src="/assets/product2/WhatsApp Image 2026-04-19 at 11.59.47 AM.jpeg" alt={product.title} />
+                <div style={{ width: '100%', height: '100%', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No Image</div>
               )}
               <div className="cozy-product-meta">
                 <h3>{product.title}</h3>
@@ -142,7 +142,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <LookbookGrid />
+      <LookbookGrid products={data.homepageProducts} />
 
       <RecommendedProducts products={data.recommendedProducts} />
     </div>
@@ -179,9 +179,7 @@ function FeaturedCollection({collection}) {
             />
           </div>
         ) : (
-          <div className="featured-collection-image">
-             <img src="/assets/product3/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg" alt="Featured Collection" />
-          </div>
+          <div className="featured-collection-image" style={{ background: '#f5f5f5' }}></div>
         )}
         <div className="featured-collection-text">
           <p>Curated Selection</p>
@@ -193,17 +191,13 @@ function FeaturedCollection({collection}) {
   );
 }
 
-function LookbookGrid() {
-  const shots = [
-    '/assets/product4/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg',
-    '/assets/product5/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg',
-    '/assets/product6/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg',
-    '/assets/product7/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg',
-    '/assets/product8/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg',
-    '/assets/product9/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg',
-    '/assets/product1/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg',
-    '/assets/product2/WhatsApp Image 2026-04-19 at 11.59.47 AM.jpeg',
-  ];
+function LookbookGrid({products = []}) {
+  const shots = products
+    .filter(p => p.featuredImage?.url)
+    .map(p => p.featuredImage.url)
+    .slice(0, 8);
+
+  if (shots.length === 0) return null;
 
   return (
     <section className="cozy-lookbook">
@@ -247,7 +241,7 @@ function RecommendedProducts({products}) {
                           sizes="(min-width: 45em) 32vw, 100vw"
                         />
                       ) : (
-                        <img src="/assets/product3/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg" alt={product.title} />
+                        <div style={{ width: '100%', height: '100%', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No Image</div>
                       )}
                       <div className="cozy-product-meta">
                         <h3>{product.title}</h3>
@@ -257,20 +251,7 @@ function RecommendedProducts({products}) {
                       </div>
                     </Link>
                   ))
-                : [
-                    {id: 'fallback-r1', title: 'Premium Basic Tee', handle: '/collections', featuredImage: null, priceRange: {minVariantPrice: {amount: '999', currencyCode: 'INR'}}},
-                    {id: 'fallback-r2', title: 'Signature Hoodie', handle: '/collections', featuredImage: null, priceRange: {minVariantPrice: {amount: '999', currencyCode: 'INR'}}},
-                  ].map((product) => (
-                    <Link key={product.id} className="cozy-product-card" to={product.handle}>
-                      <img src="/assets/product4/WhatsApp Image 2026-04-19 at 11.59.48 AM.jpeg" alt={product.title} />
-                      <div className="cozy-product-meta">
-                        <h3>{product.title}</h3>
-                        <strong>
-                          <Money data={product.priceRange.minVariantPrice} />
-                        </strong>
-                      </div>
-                    </Link>
-                  ))}
+                : null}
             </div>
           )}
         </Await>
