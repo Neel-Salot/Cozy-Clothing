@@ -88,10 +88,10 @@ export default function Homepage() {
         
         <div className="cozy-hero-copy">
           <img src="/assets/main_logo.png" alt="Cozy Clothing" className="cozy-logo" />
-          <p className="cozy-kicker">Premium Collection</p>
-          <h1>Elevate Your Comfort</h1>
+          <p className="cozy-kicker">New Drop Live</p>
+          <h1>Defy The Norm</h1>
           <p>
-            Discover the new standard in everyday luxury. Meticulously crafted for those who demand both style and substance.
+            No rules. Just pure comfort and raw streetwear aesthetics. Secure your fit before it's gone.
           </p>
           <div className="cozy-hero-ctas">
             <Link to="/collections" className="premium-btn">
